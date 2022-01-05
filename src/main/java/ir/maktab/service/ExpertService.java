@@ -3,6 +3,7 @@ package ir.maktab.service;
 import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.ImageSizeException;
+import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
 import lombok.RequiredArgsConstructor;
@@ -30,5 +31,12 @@ public class ExpertService {
     private Optional<Expert> findByEmail(String email) {
         Optional<Expert> found = expertDao.findByEmail(email);
         return found;
+    }
+
+    public void update(Expert expert){
+        Optional<Expert> found = findByEmail(expert.getEmail());
+        if(found.isEmpty())
+            throw new NotFoundException("expert not found!");
+        expertDao.update(expert);
     }
 }

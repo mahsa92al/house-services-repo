@@ -38,4 +38,12 @@ public class ExpertDao {
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
 
+    public void update(Expert expert) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(expert);
+        session.getTransaction().commit();
+        session.close();
+    }
+
 }
