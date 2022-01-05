@@ -32,7 +32,7 @@ public class UpdateServiceTest {
     }
 
     @Test
-    void give_Expert_when_Remove_Calls_Then_Exception_Return(){
+    void give_Service_when_Remove_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
                 serviceService.update(service));
         assertEquals("service not found!", result.getMessage());
