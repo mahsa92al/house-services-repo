@@ -9,6 +9,7 @@ import ir.maktab.model.entity.Expert;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -38,5 +39,12 @@ public class ExpertService {
         if(found.isEmpty())
             throw new NotFoundException("expert not found!");
         expertDao.update(expert);
+    }
+
+    public List<Expert> getAllExperts(){
+        List<Expert> experts = expertDao.findAllExperts();
+        if(experts.isEmpty())
+            throw new NotFoundException("there is no expert!");
+        return experts;
     }
 }

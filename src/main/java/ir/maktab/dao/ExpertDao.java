@@ -46,4 +46,13 @@ public class ExpertDao {
         session.close();
     }
 
+    public List<Expert> findAllExperts() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query<Expert> hql = session.createQuery("from Expert ");
+        List<Expert> list = hql.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
 }
