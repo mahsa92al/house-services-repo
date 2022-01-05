@@ -37,4 +37,12 @@ public class ClientDao {
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
+
+    public void update(Client client) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(client);
+        session.getTransaction().commit();
+        session.close();
+    }
 }
