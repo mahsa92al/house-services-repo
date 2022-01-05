@@ -1,4 +1,11 @@
-package ir.maktab.exception;/**
+package ir.maktab.exception;
+
+/**
  * @author Mahsa Alikhani m-58
- */public class ImageSizeException {
+ */
+public class ImageSizeException extends RuntimeException{
+
+    public ImageSizeException(String message) {
+        super(message);
+    }
 }
