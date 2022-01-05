@@ -55,4 +55,14 @@ public class ServiceDao {
         session.close();
         return list;
     }
+
+    public void delete(Service service) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query hql = session.createQuery("delete Service s where s.title=:title");
+        hql.setParameter("title", service.getTitle());
+        hql.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
 }

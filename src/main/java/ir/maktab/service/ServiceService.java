@@ -43,4 +43,11 @@ public class ServiceService {
             throw new NotFoundException("service not found!");
         serviceDao.update(service);
     }
+
+    public void remove(ir.maktab.model.entity.Service service){
+        Optional<ir.maktab.model.entity.Service> found = findByTitle(service.getTitle());
+        if(found.isEmpty())
+            throw new NotFoundException("service not found!");
+        serviceDao.delete(service);
+    }
 }
