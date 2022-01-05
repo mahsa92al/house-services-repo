@@ -1,6 +1,5 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Service;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
@@ -36,5 +35,13 @@ public class ServiceDao {
         session.getTransaction().commit();
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
+    }
+
+    public void update(Service service) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.update(service);
+        session.getTransaction().commit();
+        session.close();
     }
 }

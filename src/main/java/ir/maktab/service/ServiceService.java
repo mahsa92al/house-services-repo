@@ -2,7 +2,7 @@ package ir.maktab.service;
 
 import ir.maktab.dao.ServiceDao;
 import ir.maktab.exception.DuplicateException;
-import ir.maktab.model.entity.Client;
+import ir.maktab.exception.NotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -26,5 +26,12 @@ public class ServiceService {
     private Optional<ir.maktab.model.entity.Service> findByTitle(String title) {
         Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(title);
         return found;
+    }
+
+    public void update(ir.maktab.model.entity.Service service){
+        Optional<ir.maktab.model.entity.Service> found = findByTitle(service.getTitle());
+        if(found.isEmpty())
+            throw new NotFoundException("service not found!");
+        serviceDao.update(service);
     }
 }
