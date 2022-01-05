@@ -47,4 +47,11 @@ public class ExpertService {
             throw new NotFoundException("there is no expert!");
         return experts;
     }
+
+    public void remove(Expert expert){
+        Optional<Expert> found = findByEmail(expert.getEmail());
+        if(found.isEmpty())
+            throw new NotFoundException("expert not found!");
+        expertDao.delete(expert);
+    }
 }

@@ -55,4 +55,14 @@ public class ExpertDao {
         session.close();
         return list;
     }
+
+    public void delete(Expert expert) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query hql = session.createQuery("delete Expert e where e.email=:email");
+        hql.setParameter("email", expert.getEmail());
+        hql.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
+    }
 }
