@@ -9,6 +9,7 @@ import ir.maktab.model.enumaration.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -36,5 +37,12 @@ public class ClientService {
         if(found.isEmpty())
             throw new NotFoundException("client not found!");
         clientDao.update(client);
+    }
+
+    public List<Client> getAllClients(){
+        List<Client> clients = clientDao.findAllClients();
+        if(clients.isEmpty())
+            throw new NotFoundException("there is no client!");
+        return clients;
     }
 }

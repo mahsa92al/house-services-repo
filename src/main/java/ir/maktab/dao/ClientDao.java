@@ -45,4 +45,14 @@ public class ClientDao {
         session.getTransaction().commit();
         session.close();
     }
+
+    public List<Client> findAllClients() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query<Client> hql = session.createQuery("from Client");
+        List<Client> list = hql.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
 }
