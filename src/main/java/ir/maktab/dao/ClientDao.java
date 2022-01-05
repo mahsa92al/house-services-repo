@@ -30,7 +30,7 @@ public class ClientDao {
     public Optional<Client> findByEmail(String email) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Client> hql = session.createQuery("from Client where email=:email");
+        Query<Client> hql = session.createQuery("from Client c where c.email=:email");
         hql.setParameter("email", email);
         List<Client> list = hql.getResultList();
         session.getTransaction().commit();
@@ -54,5 +54,15 @@ public class ClientDao {
         session.getTransaction().commit();
         session.close();
         return list;
+    }
+
+    public void delete(Client client) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query hql = session.createQuery("delete Client c where c.email=:email");
+        hql.setParameter("email", client.getEmail());
+        hql.executeUpdate();
+        session.getTransaction().commit();
+        session.close();
     }
 }

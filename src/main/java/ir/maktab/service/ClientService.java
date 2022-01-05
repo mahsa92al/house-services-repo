@@ -45,4 +45,10 @@ public class ClientService {
             throw new NotFoundException("there is no client!");
         return clients;
     }
+     public void remove(Client client){
+         Optional<Client> found = findByEmail(client.getEmail());
+         if(found.isEmpty())
+             throw new NotFoundException("client not found!");
+         clientDao.delete(client);
+     }
 }
