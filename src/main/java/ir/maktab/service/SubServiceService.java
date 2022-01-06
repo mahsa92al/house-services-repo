@@ -44,14 +44,24 @@ public class SubServiceService {
     }
 
     public void update(ir.maktab.model.entity.Service service, SubService subService){
+        getServiceAndSubService(service, subService);
+        service.getSubServices().add(subService);
+        serviceDao.update(service);
+    }
+
+    public void remove(ir.maktab.model.entity.Service service, SubService subService){
+        getServiceAndSubService(service, subService);
+        service.getSubServices().remove(subService);
+        serviceDao.update(service);
+    }
+
+    private void getServiceAndSubService(ir.maktab.model.entity.Service service, SubService subService) {
         Optional<ir.maktab.model.entity.Service> foundService = serviceService.findByTitle(service.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Service not found!");
         Optional<SubService> found = findSubServiceByTitle(subService.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("sub service not found!");
-        service.getSubServices().add(subService);
-        serviceDao.update(service);
     }
 
 }
