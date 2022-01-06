@@ -25,7 +25,7 @@ public class ServiceService {
         serviceDao.save(service);
     }
 
-    private Optional<ir.maktab.model.entity.Service> findByTitle(String title) {
+    public Optional<ir.maktab.model.entity.Service> findByTitle(String title) {
         Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(title);
         return found;
     }
