@@ -37,4 +37,14 @@ public class SubServiceDao {
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
+
+    public List<SubService> findAllSubServices() {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        Query<SubService> hql = session.createQuery("from SubService");
+        List<SubService> list = hql.getResultList();
+        session.getTransaction().commit();
+        session.close();
+        return list;
+    }
 }

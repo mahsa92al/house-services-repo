@@ -8,6 +8,7 @@ import ir.maktab.model.entity.SubService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 /**
@@ -32,5 +33,12 @@ public class SubServiceService {
     private Optional<SubService> findSubServiceByTitle(String title) {
         Optional<SubService> found = subServiceDao.findByTitle(title);
         return found;
+    }
+
+    public List<SubService> getAllSubServices(){
+        List<SubService> subServices = subServiceDao.findAllSubServices();
+        if(subServices.isEmpty())
+            throw new NotFoundException("there is no sub service!");
+        return subServices;
     }
 }
