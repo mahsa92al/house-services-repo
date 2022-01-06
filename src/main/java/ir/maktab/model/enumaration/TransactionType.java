@@ -1,4 +1,8 @@
-package ir.maktab.model.enumaration;/**
+package ir.maktab.model.enumaration;
+
+/**
  * @author Mahsa Alikhani m-58
- */public enum TransactionType {
+ */
+public enum TransactionType {
+    PAY, EARN
 }
