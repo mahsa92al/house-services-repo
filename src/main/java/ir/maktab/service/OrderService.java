@@ -2,7 +2,6 @@ package ir.maktab.service;
 
 import ir.maktab.dao.OrderDao;
 import ir.maktab.exception.NotFoundException;
-import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class OrderService {
     private final OrderDao orderDao;
-    private final ClientService clientService;
 
     public void addOrder(Order order){
         orderDao.save(order);
