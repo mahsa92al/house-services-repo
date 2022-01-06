@@ -47,4 +47,12 @@ public class SubServiceDao {
         session.close();
         return list;
     }
+
+    public void update(SubService subService) {
+        Session session = sessionFactory.openSession();
+        session.beginTransaction();
+        session.saveOrUpdate(subService);
+        session.getTransaction().commit();
+        session.close();
+    }
 }

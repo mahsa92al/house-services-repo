@@ -1,15 +1,13 @@
 package ir.maktab.service;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.exception.DuplicateClientException;
+import ir.maktab.exception.DuplicateException;
 import ir.maktab.model.entity.Client;
-import ir.maktab.model.enumaration.ClientStatus;
+import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
-import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
-import org.springframework.stereotype.Component;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,13 +27,13 @@ public class AddClientTest {
         client.setLastName("alikhani");
         client.setEmail("mahsa.alikhani@gmail.com");
         client.setPassword("123");
-        client.setClientStatus(ClientStatus.NEW);
+        client.setUserStatus(UserStatus.NEW);
         client.setRole(Role.CLIENT);
     }
 
     @Test
     void give_Client_when_Add_Calls_Then_Exception_Return(){
-        DuplicateClientException result = assertThrows(DuplicateClientException.class, ()->
+        DuplicateException result = assertThrows(DuplicateException.class, ()->
                 clientService.add(client));
         assertEquals("Duplicate client!", result.getMessage());
     }

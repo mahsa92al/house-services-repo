@@ -1,6 +1,6 @@
 package ir.maktab.model.entity;
 
-import ir.maktab.model.enumaration.ClientStatus;
+import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,7 +32,7 @@ public class Person {
     private Date registrationDate;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private ClientStatus clientStatus;
+    private UserStatus userStatus;
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Role role;

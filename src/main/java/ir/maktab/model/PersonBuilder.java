@@ -1,10 +1,8 @@
 package ir.maktab.model;
 
-import ir.maktab.config.SpringConfig;
 import ir.maktab.model.entity.Person;
-import ir.maktab.model.enumaration.ClientStatus;
+import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.Date;
 
@@ -40,8 +38,8 @@ public class PersonBuilder {
         person.setRegistrationDate(registrationDate);
         return this;
     }
-    public PersonBuilder withClientStatus(ClientStatus clientStatus){
-        person.setClientStatus(clientStatus);
+    public PersonBuilder withClientStatus(UserStatus userStatus){
+        person.setUserStatus(userStatus);
         return this;
     }
     public PersonBuilder withRole(Role role){

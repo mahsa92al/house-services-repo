@@ -1,7 +1,6 @@
 package ir.maktab.dao;
 
 import ir.maktab.model.entity.Client;
-import ir.maktab.model.entity.Person;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;

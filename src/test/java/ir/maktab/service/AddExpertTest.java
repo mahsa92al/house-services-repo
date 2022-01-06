@@ -3,11 +3,9 @@ package ir.maktab.service;
 import ir.maktab.config.SpringConfig;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.ImageSizeException;
-import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
-import ir.maktab.model.enumaration.ClientStatus;
+import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
@@ -30,7 +28,7 @@ public class AddExpertTest {
         expert.setLastName("alikhani");
         expert.setEmail("mahsa.alikhani@gmail.com");
         expert.setPassword("123");
-        expert.setClientStatus(ClientStatus.NEW);
+        expert.setUserStatus(UserStatus.NEW);
         expert.setRole(Role.EXPERT);
         expert.setImageData(new byte[3000]);
         DuplicateException result = assertThrows(DuplicateException.class, ()->
@@ -45,7 +43,7 @@ public class AddExpertTest {
         expert.setLastName("alikhani");
         expert.setEmail("mahsa.alikhani2@gmail.com");
         expert.setPassword("123");
-        expert.setClientStatus(ClientStatus.NEW);
+        expert.setUserStatus(UserStatus.NEW);
         expert.setRole(Role.EXPERT);
         expert.setImageData(new byte[4000]);
         ImageSizeException result = assertThrows(ImageSizeException.class, ()->

@@ -4,7 +4,10 @@ import ir.maktab.dao.ServiceDao;
 import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
+import ir.maktab.exception.UserStatusException;
+import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.SubService;
+import ir.maktab.model.enumaration.UserStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -62,6 +65,26 @@ public class SubServiceService {
         Optional<SubService> found = findSubServiceByTitle(subService.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("sub service not found!");
+    }
+
+    public void addExpertToSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
+        getServiceAndSubService(service, subService);
+        if(!(expert.getUserStatus().equals(UserStatus.CONFIRMED)))
+            throw new UserStatusException("The expert not confirmed!");
+        subService.getExperts().add(expert);
+        subServiceDao.update(subService);
+    }
+
+    public void removeExpertFromSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
+        getServiceAndSubService(service, subService);
+        subService.getExperts().remove(expert);
+        subServiceDao.update(subService);
+    }
+
+    public void updateExpertSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
+        getServiceAndSubService(service, subService);
+        subService.getExperts().add(expert);
+        subServiceDao.update(subService);
     }
 
 }

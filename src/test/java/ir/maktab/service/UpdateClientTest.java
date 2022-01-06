@@ -1,9 +1,8 @@
 package ir.maktab.service;
 
 import ir.maktab.config.SpringConfig;
-import ir.maktab.exception.DuplicateClientException;
 import ir.maktab.model.entity.Client;
-import ir.maktab.model.enumaration.ClientStatus;
+import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,7 +25,7 @@ public class UpdateClientTest {
         client.setLastName("alikhani");
         client.setEmail("mahsa.alikhani@gmail.com");
         client.setPassword("456");
-        client.setClientStatus(ClientStatus.NEW);
+        client.setUserStatus(UserStatus.NEW);
         client.setRole(Role.CLIENT);
     }
 

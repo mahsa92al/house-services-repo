@@ -1,11 +1,10 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.ClientDao;
-import ir.maktab.exception.DuplicateClientException;
+import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.entity.Client;
-import ir.maktab.model.enumaration.ClientStatus;
-import ir.maktab.model.enumaration.Role;
+import ir.maktab.model.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -23,7 +22,7 @@ public class ClientService {
     public void add(Client client){
         Optional<Client> found = findByEmail(client.getEmail());
         if(found.isPresent())
-            throw new DuplicateClientException("Duplicate client!");
+            throw new DuplicateException("Duplicate client!");
         clientDao.save(client);
     }
 
@@ -45,6 +44,7 @@ public class ClientService {
             throw new NotFoundException("there is no client!");
         return clients;
     }
+
      public void remove(Client client){
          Optional<Client> found = findByEmail(client.getEmail());
          if(found.isEmpty())
