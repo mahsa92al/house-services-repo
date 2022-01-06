@@ -30,7 +30,9 @@ public class Order {
     private String Address;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
+    @ManyToOne
+    private Client client;
 
 }

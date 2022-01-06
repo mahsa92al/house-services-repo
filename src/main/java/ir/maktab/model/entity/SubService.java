@@ -23,5 +23,7 @@ public class SubService {
     private String description;
     @ManyToMany(mappedBy = "subServices")
     private List<Expert> experts = new ArrayList<>();
+    @ManyToOne
+    private Service service;
 
 }

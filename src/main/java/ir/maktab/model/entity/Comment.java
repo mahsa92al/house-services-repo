@@ -18,4 +18,9 @@ public class Comment {
     @Column(nullable = false)
     private int rate;
     private String comment;
+    @ManyToOne
+    private Client client;
+    @ManyToOne
+    private Expert expert;
+
 }

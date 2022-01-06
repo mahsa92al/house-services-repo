@@ -18,6 +18,6 @@ public class Service {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String title;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
     private List<SubService> subServices = new ArrayList<>();
 }

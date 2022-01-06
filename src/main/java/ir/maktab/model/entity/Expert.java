@@ -21,8 +21,8 @@ public class Expert extends Person{
     private double credit;
     @ManyToMany
     private List<SubService> subServices = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "expert")
     private List<Offer> offers = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "expert")
     private List<Comment> comments = new ArrayList<>();
 }

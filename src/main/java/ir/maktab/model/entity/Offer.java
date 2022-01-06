@@ -23,4 +23,8 @@ public class Offer {
     private double proposedPrice;
     private String workDuration;
     private Date startTime;
+    @ManyToOne
+    private Order order;
+    @ManyToOne
+    private Expert expert;
 }
