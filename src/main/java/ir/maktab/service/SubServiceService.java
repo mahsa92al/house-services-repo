@@ -1,6 +1,5 @@
 package ir.maktab.service;
 
-import ir.maktab.dao.ExpertDao;
 import ir.maktab.dao.ServiceDao;
 import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.DuplicateException;
