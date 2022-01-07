@@ -2,6 +2,7 @@ package ir.maktab.model.entity;
 
 import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
@@ -14,6 +15,7 @@ import java.util.Date;
  */
 @Setter
 @Getter
+@Builder
 @MappedSuperclass
 public class Person {
     @Id
