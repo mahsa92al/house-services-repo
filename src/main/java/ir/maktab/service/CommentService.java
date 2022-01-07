@@ -22,19 +22,14 @@ public class CommentService {
     }
 
     public void removeComment(Comment comment){
-        Optional<Comment> foundComment = findCommentById(comment);
+        Optional<Comment> foundComment = commentDao.findCommentById(comment);
         if(foundComment.isEmpty())
             throw new NotFoundException("comment not found!");
         commentDao.delete(comment);
     }
 
-    private Optional<Comment> findCommentById(Comment comment) {
-        Optional<Comment> foundComment = commentDao.findCommentById(comment);
-        return foundComment;
-    }
-
     public void update(Comment comment){
-        Optional<Comment> foundComment = findCommentById(comment);
+        Optional<Comment> foundComment = commentDao.findCommentById(comment);
         if(foundComment.isEmpty())
             throw new NotFoundException("comment not found!");
         commentDao.update(comment);
