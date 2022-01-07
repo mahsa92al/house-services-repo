@@ -22,19 +22,14 @@ public class OrderService {
     }
 
     public void removeOrder(Order order){
-        Optional<Order> foundOrder = findOrderById(order);
+        Optional<Order> foundOrder = orderDao.findOrderById(order);
         if(foundOrder.isEmpty())
             throw new NotFoundException("order not found!");
         orderDao.delete(order);
     }
 
-    private Optional<Order> findOrderById(Order order) {
-        Optional<Order> foundOrder = orderDao.findOrderById(order);
-        return foundOrder;
-    }
-
     public void update(Order order){
-        Optional<Order> foundOrder = findOrderById(order);
+        Optional<Order> foundOrder = orderDao.findOrderById(order);
         if(foundOrder.isEmpty())
             throw new NotFoundException("order not found!");
         orderDao.update(order);
