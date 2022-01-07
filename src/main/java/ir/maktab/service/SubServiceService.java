@@ -44,13 +44,17 @@ public class SubServiceService {
 
     public void update(ir.maktab.model.entity.Service service, SubService subService){
         getServiceAndSubService(service, subService);
-        service.getSubServices().add(subService);
+        List<SubService> subServices = service.getSubServices();
+        subServices.add(subService);
+        service.setSubServices(subServices);
         serviceDao.update(service);
     }
 
     public void remove(ir.maktab.model.entity.Service service, SubService subService){
         getServiceAndSubService(service, subService);
-        service.getSubServices().remove(subService);
+        List<SubService> subServices = service.getSubServices();
+        subServices.remove(subService);
+        service.setSubServices(subServices);
         serviceDao.update(service);
     }
 
