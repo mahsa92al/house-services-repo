@@ -17,13 +17,16 @@ public class SubService {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String title;
     @Column(nullable = false)
-    private double basePrice;
+    private Double basePrice;
     private String description;
     @ManyToMany(mappedBy = "subServices")
     private List<Expert> experts = new ArrayList<>();
     @ManyToOne
     private Service service;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subService")
+    private List<Order> orders = new ArrayList<>();
 
 }
