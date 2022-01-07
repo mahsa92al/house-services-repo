@@ -16,11 +16,15 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     @Column(nullable = false)
-    private int rate;
+    private Double rate;
     private String comment;
     @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "client_id")
     private Client client;
     @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "expert_id")
     private Expert expert;
 
 }
