@@ -17,6 +17,7 @@ public class Service {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(unique = true)
     private String title;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
     private List<SubService> subServices = new ArrayList<>();
