@@ -3,7 +3,6 @@ package ir.maktab.service;
 import ir.maktab.dao.ServiceDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
-import ir.maktab.model.entity.Client;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
