@@ -1,6 +1,5 @@
 package ir.maktab.model.dto;
 
-import ir.maktab.model.enumaration.Role;
 import ir.maktab.model.enumaration.UserStatus;
 
 import java.util.Date;
