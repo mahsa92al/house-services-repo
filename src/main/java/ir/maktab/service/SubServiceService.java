@@ -28,15 +28,10 @@ public class SubServiceService {
         Optional<ir.maktab.model.entity.Service> foundService = serviceService.findByTitle(service.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Service not found!");
-        Optional<SubService> foundSubService = findSubServiceByTitle(subService.getTitle());
+        Optional<SubService> foundSubService = subServiceDao.findByTitle(subService.getTitle());
         if(foundSubService.isPresent())
             throw new DuplicateException("Duplicate sub service!");
         subServiceDao.save(subService);
-    }
-
-    private Optional<SubService> findSubServiceByTitle(String title) {
-        Optional<SubService> found = subServiceDao.findByTitle(title);
-        return found;
     }
 
     public List<SubService> getAllSubServices(){
@@ -62,7 +57,7 @@ public class SubServiceService {
         Optional<ir.maktab.model.entity.Service> foundService = serviceService.findByTitle(service.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Service not found!");
-        Optional<SubService> found = findSubServiceByTitle(subService.getTitle());
+        Optional<SubService> found = subServiceDao.findByTitle(subService.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("sub service not found!");
     }
