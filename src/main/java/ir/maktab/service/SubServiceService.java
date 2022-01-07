@@ -21,11 +21,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SubServiceService {
     private final SubServiceDao subServiceDao;
-    private final ServiceService serviceService;
     private final ServiceDao serviceDao;
 
     public void add(ir.maktab.model.entity.Service service, SubService subService){
-        Optional<ir.maktab.model.entity.Service> foundService = serviceService.findByTitle(service.getTitle());
+        Optional<ir.maktab.model.entity.Service> foundService = serviceDao.findByTitle(service.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Service not found!");
         Optional<SubService> foundSubService = subServiceDao.findByTitle(subService.getTitle());
@@ -58,7 +57,7 @@ public class SubServiceService {
     }
 
     private void getServiceAndSubService(ir.maktab.model.entity.Service service, SubService subService) {
-        Optional<ir.maktab.model.entity.Service> foundService = serviceService.findByTitle(service.getTitle());
+        Optional<ir.maktab.model.entity.Service> foundService = serviceDao.findByTitle(service.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Service not found!");
         Optional<SubService> found = subServiceDao.findByTitle(subService.getTitle());
