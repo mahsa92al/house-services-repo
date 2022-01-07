@@ -4,7 +4,6 @@ import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.ImageSizeException;
 import ir.maktab.exception.NotFoundException;
-import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,7 +20,7 @@ public class ExpertService {
     private final ExpertDao expertDao;
 
     public void add(Expert expert){
-        Optional<Expert> found = findByEmail(expert.getEmail());
+        Optional<Expert> found = expertDao.findByEmail(expert.getEmail());
         if(found.isPresent())
             throw new DuplicateException("Duplicate expert!");
         if(expert.getImageData().length > 3072)
@@ -29,13 +28,8 @@ public class ExpertService {
         expertDao.save(expert);
     }
 
-    private Optional<Expert> findByEmail(String email) {
-        Optional<Expert> found = expertDao.findByEmail(email);
-        return found;
-    }
-
     public void update(Expert expert){
-        Optional<Expert> found = findByEmail(expert.getEmail());
+        Optional<Expert> found = expertDao.findByEmail(expert.getEmail());
         if(found.isEmpty())
             throw new NotFoundException("expert not found!");
         expertDao.update(expert);
@@ -49,7 +43,7 @@ public class ExpertService {
     }
 
     public void remove(Expert expert){
-        Optional<Expert> found = findByEmail(expert.getEmail());
+        Optional<Expert> found = expertDao.findByEmail(expert.getEmail());
         if(found.isEmpty())
             throw new NotFoundException("expert not found!");
         expertDao.delete(expert);
