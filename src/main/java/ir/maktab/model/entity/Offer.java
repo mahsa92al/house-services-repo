@@ -20,11 +20,16 @@ public class Offer {
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     private Date offerSubmissionDate;
-    private double proposedPrice;
+    private Double proposedPrice;
     private String workDuration;
+    @Temporal(TemporalType.TIME)
     private Date startTime;
     @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "order_id")
     private Order order;
     @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "expert_id")
     private Expert expert;
 }
