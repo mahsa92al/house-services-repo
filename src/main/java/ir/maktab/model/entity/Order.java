@@ -16,11 +16,12 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
+@Table(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    private double proposedPrice;
+    private Double proposedPrice;
     private String description;
     @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
@@ -33,6 +34,16 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
     @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "client_id")
     private Client client;
+    @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "expert_id")
+    private Expert expert;
+    @ManyToOne
+    @Column(nullable = false)
+    @JoinColumn(name = "sub-category_id")
+    private SubService subService;
 
 }
