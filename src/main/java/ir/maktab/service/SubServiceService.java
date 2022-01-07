@@ -1,5 +1,6 @@
 package ir.maktab.service;
 
+import ir.maktab.dao.ExpertDao;
 import ir.maktab.dao.ServiceDao;
 import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.DuplicateException;
@@ -79,11 +80,4 @@ public class SubServiceService {
         subService.setExperts(experts);
         subServiceDao.update(subService);
     }
-
-    public void updateExpertSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
-        getServiceAndSubService(service, subService);
-        subService.getExperts().add(expert);
-        subServiceDao.update(subService);
-    }
-
 }
