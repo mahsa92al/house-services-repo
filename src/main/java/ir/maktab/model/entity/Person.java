@@ -4,7 +4,6 @@ import ir.maktab.model.enumaration.UserStatus;
 import ir.maktab.model.enumaration.Role;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.experimental.SuperBuilder;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -15,7 +14,6 @@ import java.util.Date;
  */
 @Setter
 @Getter
-@SuperBuilder
 @MappedSuperclass
 public class Person {
     @Id
