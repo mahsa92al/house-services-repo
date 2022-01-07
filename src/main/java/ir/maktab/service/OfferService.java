@@ -22,19 +22,14 @@ public class OfferService {
     }
 
     public void removeOffer(Offer offer){
-        Optional<Offer> foundOffer = findOfferById(offer);
+        Optional<Offer> foundOffer = offerDao.findOfferById(offer);
         if(foundOffer.isEmpty())
             throw new NotFoundException("offer not found!");
         offerDao.delete(offer);
     }
 
-    private Optional<Offer> findOfferById(Offer offer) {
-        Optional<Offer> foundOffer = offerDao.findOfferById(offer);
-        return foundOffer;
-    }
-
     public void update(Offer offer){
-        Optional<Offer> foundOffer = findOfferById(offer);
+        Optional<Offer> foundOffer = offerDao.findOfferById(offer);
         if(foundOffer.isEmpty())
             throw new NotFoundException("offer not found!");
         offerDao.update(offer);
