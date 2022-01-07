@@ -2,15 +2,10 @@ package ir.maktab.model.dto;
 
 import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
-import ir.maktab.model.entity.Offer;
 import ir.maktab.model.entity.SubService;
 import ir.maktab.model.enumaration.OrderStatus;
-import org.hibernate.annotations.CreationTimestamp;
 
-import javax.persistence.*;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 
 /**
  * @author Mahsa Alikhani m-58
