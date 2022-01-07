@@ -2,7 +2,6 @@ package ir.maktab.service;
 
 import ir.maktab.dao.PersonDao;
 import ir.maktab.model.dto.PersonDto;
-import ir.maktab.model.entity.Person;
 import ir.maktab.model.enumaration.Role;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
