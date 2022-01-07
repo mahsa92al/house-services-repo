@@ -66,13 +66,17 @@ public class SubServiceService {
         getServiceAndSubService(service, subService);
         if(!(expert.getUserStatus().equals(UserStatus.CONFIRMED)))
             throw new UserStatusException("The expert not confirmed!");
-        subService.getExperts().add(expert);
+        List<Expert> experts = subService.getExperts();
+        experts.add(expert);
+        subService.setExperts(experts);
         subServiceDao.update(subService);
     }
 
     public void removeExpertFromSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
         getServiceAndSubService(service, subService);
-        subService.getExperts().remove(expert);
+        List<Expert> experts = subService.getExperts();
+        experts.remove(expert);
+        subService.setExperts(experts);
         subServiceDao.update(subService);
     }
 
