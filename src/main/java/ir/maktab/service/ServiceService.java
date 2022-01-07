@@ -19,15 +19,10 @@ public class ServiceService {
     private final ServiceDao serviceDao;
 
     public void add(ir.maktab.model.entity.Service service){
-        Optional<ir.maktab.model.entity.Service> found = findByTitle(service.getTitle());
+        Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(service.getTitle());
         if(found.isPresent())
             throw new DuplicateException("Duplicate service!");
         serviceDao.save(service);
-    }
-
-    public Optional<ir.maktab.model.entity.Service> findByTitle(String title) {
-        Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(title);
-        return found;
     }
 
     public List<ir.maktab.model.entity.Service> getAllServices(){
@@ -38,14 +33,14 @@ public class ServiceService {
     }
 
     public void update(ir.maktab.model.entity.Service service){
-        Optional<ir.maktab.model.entity.Service> found = findByTitle(service.getTitle());
+        Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(service.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("service not found!");
         serviceDao.update(service);
     }
 
     public void remove(ir.maktab.model.entity.Service service){
-        Optional<ir.maktab.model.entity.Service> found = findByTitle(service.getTitle());
+        Optional<ir.maktab.model.entity.Service> found = serviceDao.findByTitle(service.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("service not found!");
         serviceDao.delete(service);
