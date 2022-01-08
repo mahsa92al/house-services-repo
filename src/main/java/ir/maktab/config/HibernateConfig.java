@@ -4,55 +4,55 @@ import ir.maktab.model.entity.*;
 import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistry;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
-import org.hibernate.cfg.Environment;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Lazy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 
 import java.util.Properties;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@PropertySource("classpath:database.properties")
 @Configuration
 public class HibernateConfig {
 
-    public static SessionFactory sessionFactory;
+    @Autowired
+    private Environment environment;
+
     @Bean("sessionFactory")
     @Lazy
-    public static SessionFactory getSessionFactory() {
-        if (sessionFactory == null) {
-            try {
-                org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
+    public SessionFactory getSessionFactory(Properties hibernateProperties) {
 
-                configuration.setPhysicalNamingStrategy(new SnakeCasePhysicalNamingStrategy());
+        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
 
-                configuration.addAnnotatedClass(Client.class);
-                configuration.addAnnotatedClass(Expert.class);
-                configuration.addAnnotatedClass(Admin.class);
-                configuration.addAnnotatedClass(Comment.class);
-                configuration.addAnnotatedClass(Offer.class);
-                configuration.addAnnotatedClass(Order.class);
-                configuration.addAnnotatedClass(Service.class);
-                configuration.addAnnotatedClass(SubService.class);
+        configuration.setPhysicalNamingStrategy(new SnakeCasePhysicalNamingStrategy());
 
-                Properties settings = new Properties();
-                settings.put(Environment.DRIVER, "com.mysql.cj.jdbc.Driver");
-                settings.put(Environment.URL, "jdbc:mysql://localhost:3306/house_services");
-                settings.put(Environment.USER, "root");
-                settings.put(Environment.PASS, "5103583");
-                settings.put(Environment.DIALECT, "org.hibernate.dialect.MySQL5Dialect");
-                settings.put(Environment.SHOW_SQL, "true");
-                settings.put(Environment.HBM2DDL_AUTO, "update");
-                configuration.setProperties(settings);
+        configuration.addAnnotatedClass(Client.class);
+        configuration.addAnnotatedClass(Expert.class);
+        configuration.addAnnotatedClass(Admin.class);
+        configuration.addAnnotatedClass(Comment.class);
+        configuration.addAnnotatedClass(Offer.class);
+        configuration.addAnnotatedClass(ClientOrder.class);
+        configuration.addAnnotatedClass(Service.class);
+        configuration.addAnnotatedClass(SubService.class);
 
-                StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                        .applySettings(configuration.getProperties()).build();
-                sessionFactory = configuration.buildSessionFactory(serviceRegistry);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return sessionFactory;
+        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
+                .applySettings(hibernateProperties).build();
+        return configuration.buildSessionFactory(serviceRegistry);
+    }
+
+    @Bean
+    public Properties hibernateProperties() {
+        Properties properties = new Properties();
+        properties.setProperty(org.hibernate.cfg.Environment.DRIVER, environment.getProperty("hibernate.connection.driver_class"));
+        properties.setProperty(org.hibernate.cfg.Environment.URL, environment.getProperty("hibernate.connection.url"));
+        properties.setProperty(org.hibernate.cfg.Environment.USER, environment.getProperty("hibernate.connection.username"));
+        properties.setProperty(org.hibernate.cfg.Environment.PASS, environment.getProperty("hibernate.connection.password"));
+        properties.setProperty(org.hibernate.cfg.Environment.DIALECT, environment.getProperty("hibernate.dialect"));
+        properties.setProperty(org.hibernate.cfg.Environment.HBM2DDL_AUTO, environment.getProperty("hibernate.hbm2ddl.auto"));
+        properties.setProperty(org.hibernate.cfg.Environment.SHOW_SQL, environment.getProperty("hibernate.show_sql"));
+        properties.setProperty(org.hibernate.cfg.Environment.FORMAT_SQL, environment.getProperty("hibernate.format_sql"));
+        return properties;
     }
 }
