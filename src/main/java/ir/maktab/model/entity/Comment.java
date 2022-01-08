@@ -19,12 +19,10 @@ public class Comment {
     private Double rate;
     private String comment;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "expert_id")
+    @JoinColumn(name = "expert_id", nullable = false)
     private Expert expert;
 
 }

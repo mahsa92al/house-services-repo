@@ -34,16 +34,13 @@ public class Order {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "client_id")
+    @JoinColumn(name = "client_id", nullable = false)
     private Client client;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "expert_id")
+    @JoinColumn(name = "expert_id", nullable = false)
     private Expert expert;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "sub-category_id")
+    @JoinColumn(name = "sub-category_id", nullable = false)
     private SubService subService;
 
 }

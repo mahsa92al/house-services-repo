@@ -25,6 +25,7 @@ public class SubService {
     @ManyToMany(mappedBy = "subServices")
     private List<Expert> experts = new ArrayList<>();
     @ManyToOne
+    @JoinColumn(name = "service_id", nullable = false)
     private Service service;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subService")
     private List<Order> orders = new ArrayList<>();

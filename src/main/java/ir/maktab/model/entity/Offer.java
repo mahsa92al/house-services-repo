@@ -25,11 +25,9 @@ public class Offer {
     @Temporal(TemporalType.TIME)
     private Date startTime;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "order_id")
+    @JoinColumn(name = "order_id", nullable = false)
     private Order order;
     @ManyToOne
-    @Column(nullable = false)
-    @JoinColumn(name = "expert_id")
+    @JoinColumn(name = "expert_id", nullable = false)
     private Expert expert;
 }
