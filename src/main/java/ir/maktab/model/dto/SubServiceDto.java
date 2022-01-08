@@ -1,7 +1,7 @@
 package ir.maktab.model.dto;
 
 import ir.maktab.model.entity.Expert;
-import ir.maktab.model.entity.Order;
+import ir.maktab.model.entity.ClientOrder;
 import ir.maktab.model.entity.Service;
 
 import java.util.List;
@@ -15,5 +15,5 @@ public class SubServiceDto {
     private String description;
     private List<Expert> experts;
     private Service service;
-    private List<Order> orders;
+    private List<ClientOrder> clientOrder;
 }

@@ -18,7 +18,7 @@ import java.util.List;
 public class Client extends Person{
     private Double credit;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();
+    private List<ClientOrder> clientOrders = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "client")
     private List<Comment> comments = new ArrayList<>();
 }

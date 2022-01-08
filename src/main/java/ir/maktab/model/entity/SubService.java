@@ -28,6 +28,6 @@ public class SubService {
     @JoinColumn(name = "service_id", nullable = false)
     private Service service;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subService")
-    private List<Order> orders = new ArrayList<>();
+    private List<ClientOrder> clientOrders = new ArrayList<>();
 
 }

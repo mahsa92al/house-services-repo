@@ -6,7 +6,6 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
-import java.security.PrivateKey;
 import java.util.Date;
 
 /**
@@ -29,5 +28,5 @@ public class Transaction {
     @OneToOne
     private Expert expert;
     @OneToOne
-    private Order order;
+    private ClientOrder clientOrder;
 }

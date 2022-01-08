@@ -2,7 +2,7 @@ package ir.maktab.service;
 
 import ir.maktab.dao.OrderDao;
 import ir.maktab.exception.NotFoundException;
-import ir.maktab.model.entity.Order;
+import ir.maktab.model.entity.ClientOrder;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,28 +17,28 @@ import java.util.Optional;
 public class OrderService {
     private final OrderDao orderDao;
 
-    public void addOrder(Order order){
-        orderDao.save(order);
+    public void addOrder(ClientOrder clientOrder){
+        orderDao.save(clientOrder);
     }
 
-    public void removeOrder(Order order){
-        Optional<Order> foundOrder = orderDao.findOrderById(order);
+    public void removeOrder(ClientOrder clientOrder){
+        Optional<ClientOrder> foundOrder = orderDao.findOrderById(clientOrder);
         if(foundOrder.isEmpty())
             throw new NotFoundException("order not found!");
-        orderDao.delete(order);
+        orderDao.delete(clientOrder);
     }
 
-    public void update(Order order){
-        Optional<Order> foundOrder = orderDao.findOrderById(order);
+    public void update(ClientOrder clientOrder){
+        Optional<ClientOrder> foundOrder = orderDao.findOrderById(clientOrder);
         if(foundOrder.isEmpty())
             throw new NotFoundException("order not found!");
-        orderDao.update(order);
+        orderDao.update(clientOrder);
     }
 
-    public List<Order> getAllOrders(){
-        List<Order> orders = orderDao.findAllOrders();
-        if(orders.isEmpty())
+    public List<ClientOrder> getAllOrders(){
+        List<ClientOrder> clientOrder = orderDao.findAllOrders();
+        if(clientOrder.isEmpty())
             throw new NotFoundException("there is no order!");
-        return orders;
+        return clientOrder;
     }
 }

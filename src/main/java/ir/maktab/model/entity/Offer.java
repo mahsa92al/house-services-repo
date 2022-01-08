@@ -26,7 +26,7 @@ public class Offer {
     private Date startTime;
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
-    private Order order;
+    private ClientOrder clientOrder;
     @ManyToOne
     @JoinColumn(name = "expert_id", nullable = false)
     private Expert expert;
