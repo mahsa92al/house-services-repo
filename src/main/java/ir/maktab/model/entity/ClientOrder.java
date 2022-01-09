@@ -39,7 +39,7 @@ public class ClientOrder {
     @JoinColumn(name = "expert_id", nullable = false)
     private Expert expert;
     @ManyToOne
-    @JoinColumn(name = "sub-category_id", nullable = false)
+    @JoinColumn(name = "sub_category_id", nullable = false)
     private SubService subService;
 
 }
