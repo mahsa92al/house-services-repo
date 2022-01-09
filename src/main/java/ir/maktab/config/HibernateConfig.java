@@ -8,8 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import javax.sql.DataSource;
 import java.util.Properties;
 
 /**
@@ -24,6 +26,15 @@ public class HibernateConfig {
     @Autowired
     private Environment environment;
 
+    @Bean
+    DataSource dataSource() {
+        DriverManagerDataSource dataSource = new DriverManagerDataSource();
+        dataSource.setDriverClassName(environment.getProperty("hibernate.connection.driver_class"));
+        dataSource.setUrl(environment.getProperty("hibernate.connection.url"));
+        dataSource.setUsername(environment.getProperty("hibernate.connection.username"));
+        dataSource.setPassword(environment.getProperty("hibernate.connection.password"));
+        return dataSource;
+    }
 
     @Bean
     public Properties hibernateProperties() {
