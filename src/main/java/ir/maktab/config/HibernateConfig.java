@@ -7,12 +7,16 @@ import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import java.util.Properties;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@EnableJpaRepositories(basePackages = "ir.maktab.dao")
+@EnableTransactionManagement
 @PropertySource("classpath:database.properties")
 @Configuration
 public class HibernateConfig {
