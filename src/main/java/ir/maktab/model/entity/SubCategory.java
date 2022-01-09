@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class SubService {
+public class SubCategory {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -22,12 +22,12 @@ public class SubService {
     @Column(nullable = false)
     private Double basePrice;
     private String description;
-    @ManyToMany(mappedBy = "subServices")
+    @ManyToMany(mappedBy = "subCategories")
     private List<Expert> experts = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subService")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "subCategory")
     private List<ClientOrder> clientOrders = new ArrayList<>();
 
 }

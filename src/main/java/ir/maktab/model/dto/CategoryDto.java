@@ -1,6 +1,6 @@
 package ir.maktab.model.dto;
 
-import ir.maktab.model.entity.SubService;
+import ir.maktab.model.entity.SubCategory;
 
 import java.util.List;
 
@@ -9,5 +9,5 @@ import java.util.List;
  */
 public class CategoryDto {
     private String title;
-    private List<SubService> subServices;
+    private List<SubCategory> subCategories;
 }

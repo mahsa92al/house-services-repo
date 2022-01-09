@@ -20,5 +20,5 @@ public class Category {
     @Column(unique = true)
     private String title;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private List<SubService> subServices = new ArrayList<>();
+    private List<SubCategory> subCategories = new ArrayList<>();
 }

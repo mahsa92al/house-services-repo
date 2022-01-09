@@ -40,6 +40,6 @@ public class ClientOrder {
     private Expert expert;
     @ManyToOne
     @JoinColumn(name = "sub_category_id", nullable = false)
-    private SubService subService;
+    private SubCategory subCategory;
 
 }

@@ -20,7 +20,7 @@ public class Expert extends Person{
     private Double meanRate;
     private Double credit;
     @ManyToMany
-    private List<SubService> subServices = new ArrayList<>();
+    private List<SubCategory> subCategories = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "expert")
     private List<Offer> offers = new ArrayList<>();
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "expert")

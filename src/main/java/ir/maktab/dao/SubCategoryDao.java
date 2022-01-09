@@ -1,6 +1,6 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.entity.SubService;
+import ir.maktab.model.entity.SubCategory;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,42 +15,42 @@ import java.util.Optional;
  */
 @Repository
 @RequiredArgsConstructor
-public class SubServiceDao {
+public class SubCategoryDao {
     private final SessionFactory sessionFactory;
 
-    public void save(SubService subService) {
+    public void save(SubCategory subCategory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(subService);
+        session.save(subCategory);
         session.getTransaction().commit();
         session.close();
     }
 
-    public Optional<SubService> findByTitle(String title) {
+    public Optional<SubCategory> findByTitle(String title) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<SubService> hql = session.createQuery("from SubService ss where ss.title=:title");
+        Query<SubCategory> hql = session.createQuery("from SubCategory ss where ss.title=:title");
         hql.setParameter("title", title);
-        List<SubService> list = hql.getResultList();
+        List<SubCategory> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
 
-    public List<SubService> findAllSubServices() {
+    public List<SubCategory> findAllSubCategories() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<SubService> hql = session.createQuery("from SubService");
-        List<SubService> list = hql.getResultList();
+        Query<SubCategory> hql = session.createQuery("from SubCategory");
+        List<SubCategory> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return list;
     }
 
-    public void update(SubService subService) {
+    public void update(SubCategory subCategory) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.saveOrUpdate(subService);
+        session.saveOrUpdate(subCategory);
         session.getTransaction().commit();
         session.close();
     }

@@ -4,7 +4,7 @@ import ir.maktab.config.SpringConfig;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.Category;
-import ir.maktab.model.entity.SubService;
+import ir.maktab.model.entity.SubCategory;
 import ir.maktab.model.enumaration.Role;
 import ir.maktab.model.enumaration.UserStatus;
 import org.junit.jupiter.api.Test;
@@ -16,21 +16,21 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 /**
  * @author Mahsa Alikhani m-58
  */
-public class AddExpertToSubServiceTest {
+public class AddExpertToSubCategoryTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    SubServiceService subServiceService = context.getBean(SubServiceService.class);
+    SubCategoryService subCategoryService = context.getBean(SubCategoryService.class);
     Category service;
-    SubService subService;
+    SubCategory subCategory;
     Expert expert;
 
     @Test
     void give_Service_And_SubService_And_Expert_when_AddExpertToSubService_Calls_Then_Service_NotFoundException_Return(){
         service = new Category();
         service.setTitle("house facilities");
-        subService = new SubService();
-        subService.setTitle("water");
-        subService.setBasePrice(100d);
-        subService.setDescription("using newest equipment");
+        subCategory = new SubCategory();
+        subCategory.setTitle("water");
+        subCategory.setBasePrice(100d);
+        subCategory.setDescription("using newest equipment");
         expert = new Expert();
         expert.setName("ladan");
         expert.setLastName("kiani");
@@ -41,7 +41,7 @@ public class AddExpertToSubServiceTest {
         expert.setImageData(new byte[3000]);
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subServiceService.addExpertToSubService(service, subService, expert));
+                subCategoryService.addExpertToSubCategory(service, subCategory, expert));
         assertEquals("Service not found!", result.getMessage());
     }
 
@@ -49,10 +49,10 @@ public class AddExpertToSubServiceTest {
     void give_Service_And_SubService_And_Expert_when_AddExpertToSubService_Calls_Then_SubService_NotFoundException_Return(){
         service = new Category();
         service.setTitle("cleaning");
-        subService = new SubService();
-        subService.setTitle("floor washing");
-        subService.setBasePrice(50d);
-        subService.setDescription("extra drying");
+        subCategory = new SubCategory();
+        subCategory.setTitle("floor washing");
+        subCategory.setBasePrice(50d);
+        subCategory.setDescription("extra drying");
         expert = new Expert();
         expert.setName("ladan");
         expert.setLastName("kiani");
@@ -63,7 +63,7 @@ public class AddExpertToSubServiceTest {
         expert.setImageData(new byte[3000]);
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subServiceService.addExpertToSubService(service, subService, expert));
+                subCategoryService.addExpertToSubCategory(service, subCategory, expert));
         assertEquals("sub service not found!", result.getMessage());
     }
 }

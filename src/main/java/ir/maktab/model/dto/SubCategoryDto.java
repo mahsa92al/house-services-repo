@@ -9,7 +9,7 @@ import java.util.List;
 /**
  * @author Mahsa Alikhani m-58
  */
-public class SubServiceDto {
+public class SubCategoryDto {
     private String title;
     private Double basePrice;
     private String description;

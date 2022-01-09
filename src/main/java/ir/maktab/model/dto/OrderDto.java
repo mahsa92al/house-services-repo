@@ -2,7 +2,7 @@ package ir.maktab.model.dto;
 
 import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
-import ir.maktab.model.entity.SubService;
+import ir.maktab.model.entity.SubCategory;
 import ir.maktab.model.enumaration.OrderStatus;
 
 import java.util.Date;
@@ -20,5 +20,5 @@ public class OrderDto {
     private OrderStatus orderStatus;
     private Client client;
     private Expert expert;
-    private SubService subService;
+    private SubCategory subCategory;
 }
