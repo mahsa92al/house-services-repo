@@ -9,6 +9,8 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
+import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
@@ -29,24 +31,31 @@ public class HibernateConfig {
     @Bean
     DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getProperty("hibernate.connection.driver_class"));
-        dataSource.setUrl(environment.getProperty("hibernate.connection.url"));
-        dataSource.setUsername(environment.getProperty("hibernate.connection.username"));
-        dataSource.setPassword(environment.getProperty("hibernate.connection.password"));
+        dataSource.setDriverClassName(environment.getProperty("database.driver_class"));
+        dataSource.setUrl(environment.getProperty("database.url"));
+        dataSource.setUsername(environment.getProperty("database.username"));
+        dataSource.setPassword(environment.getProperty("database.password"));
         return dataSource;
     }
 
     @Bean
+    LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
+        LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
+        entityManagerFactoryBean.setDataSource(dataSource);
+        entityManagerFactoryBean.setJpaVendorAdapter(new HibernateJpaVendorAdapter());
+        entityManagerFactoryBean.setPackagesToScan("ir.maktab.model.entity");
+        entityManagerFactoryBean.setJpaProperties(hibernateProperties());
+        return entityManagerFactoryBean;
+    }
+
+    @Bean
     public Properties hibernateProperties() {
-        Properties properties = new Properties();
-        properties.setProperty(org.hibernate.cfg.Environment.DRIVER, environment.getProperty("hibernate.connection.driver_class"));
-        properties.setProperty(org.hibernate.cfg.Environment.URL, environment.getProperty("hibernate.connection.url"));
-        properties.setProperty(org.hibernate.cfg.Environment.USER, environment.getProperty("hibernate.connection.username"));
-        properties.setProperty(org.hibernate.cfg.Environment.PASS, environment.getProperty("hibernate.connection.password"));
-        properties.setProperty(org.hibernate.cfg.Environment.DIALECT, environment.getProperty("hibernate.dialect"));
-        properties.setProperty(org.hibernate.cfg.Environment.HBM2DDL_AUTO, environment.getProperty("hibernate.hbm2ddl.auto"));
-        properties.setProperty(org.hibernate.cfg.Environment.SHOW_SQL, environment.getProperty("hibernate.show_sql"));
-        properties.setProperty(org.hibernate.cfg.Environment.FORMAT_SQL, environment.getProperty("hibernate.format_sql"));
-        return properties;
+        Properties jpaProperties = new Properties();
+        jpaProperties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
+        jpaProperties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
+        jpaProperties.put("hibernate.naming_strategy", environment.getRequiredProperty("hibernate.naming_strategy"));
+        jpaProperties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
+        jpaProperties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
+        return jpaProperties;
     }
 }
