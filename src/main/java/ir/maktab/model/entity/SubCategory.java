@@ -28,6 +28,6 @@ public class SubCategory {
     @JoinColumn(name = "category_id", nullable = false)
     private Category category;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "subCategory")
-    private List<ClientOrder> clientOrders = new ArrayList<>();
+    private List<Order> orders = new ArrayList<>();
 
 }

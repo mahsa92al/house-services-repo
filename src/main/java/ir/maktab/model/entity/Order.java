@@ -16,7 +16,8 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class ClientOrder {
+@Table(name = "orders")
+public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
@@ -30,7 +31,7 @@ public class ClientOrder {
     private String Address;
     @Enumerated(EnumType.STRING)
     private OrderStatus orderStatus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "clientOrder")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "order")
     private List<Offer> offers = new ArrayList<>();
     @ManyToOne
     @JoinColumn(name = "client_id", nullable = false)

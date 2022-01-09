@@ -28,5 +28,5 @@ public class Transaction {
     @OneToOne
     private Expert expert;
     @OneToOne
-    private ClientOrder clientOrder;
+    private Order order;
 }

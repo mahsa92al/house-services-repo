@@ -33,7 +33,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Admin.class);
         configuration.addAnnotatedClass(Comment.class);
         configuration.addAnnotatedClass(Offer.class);
-        configuration.addAnnotatedClass(ClientOrder.class);
+        configuration.addAnnotatedClass(Order.class);
         configuration.addAnnotatedClass(Category.class);
         configuration.addAnnotatedClass(SubCategory.class);
 

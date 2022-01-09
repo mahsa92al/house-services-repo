@@ -1,6 +1,6 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.entity.ClientOrder;
+import ir.maktab.model.entity.Order;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,48 +18,48 @@ import java.util.Optional;
 public class OrderDao {
     private final SessionFactory sessionFactory;
 
-    public void save(ClientOrder clientOrder) {
+    public void save(Order order) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(clientOrder);
+        session.save(order);
         session.getTransaction().commit();
         session.close();
     }
 
-    public void delete(ClientOrder clientOrder) {
+    public void delete(Order order) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query hql = session.createQuery("delete ClientOrder o where o.id=:id");
-        hql.setParameter("id", clientOrder.getId());
+        Query hql = session.createQuery("delete Order o where o.id=:id");
+        hql.setParameter("id", order.getId());
         hql.executeUpdate();
         session.getTransaction().commit();
         session.close();
     }
 
-    public Optional<ClientOrder> findOrderById(ClientOrder clientOrder) {
+    public Optional<Order> findOrderById(Order order) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<ClientOrder> hql = session.createQuery("from ClientOrder o where o.id=:id");
-        hql.setParameter("id", clientOrder.getId());
-        List<ClientOrder> list = hql.getResultList();
+        Query<Order> hql = session.createQuery("from Order o where o.id=:id");
+        hql.setParameter("id", order.getId());
+        List<Order> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
 
-    public void update(ClientOrder clientOrder) {
+    public void update(Order order) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.saveOrUpdate(clientOrder);
+        session.saveOrUpdate(order);
         session.getTransaction().commit();
         session.close();
     }
 
-    public List<ClientOrder> findAllOrders() {
+    public List<Order> findAllOrders() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<ClientOrder> hql = session.createQuery("from ClientOrder");
-        List<ClientOrder> list = hql.getResultList();
+        Query<Order> hql = session.createQuery("from Order");
+        List<Order> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return list;

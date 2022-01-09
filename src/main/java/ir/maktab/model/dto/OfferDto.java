@@ -1,6 +1,6 @@
 package ir.maktab.model.dto;
 
-import ir.maktab.model.entity.ClientOrder;
+import ir.maktab.model.entity.Order;
 import ir.maktab.model.entity.Expert;
 
 import java.util.Date;
@@ -14,6 +14,6 @@ public class OfferDto {
     private Double proposedPrice;
     private String workDuration;
     private Date startTime;
-    private ClientOrder clientOrder;
+    private Order order;
     private Expert expert;
 }
