@@ -24,27 +24,6 @@ public class HibernateConfig {
     @Autowired
     private Environment environment;
 
-    @Bean("sessionFactory")
-    @Lazy
-    public SessionFactory getSessionFactory(Properties hibernateProperties) {
-
-        org.hibernate.cfg.Configuration configuration = new org.hibernate.cfg.Configuration();
-
-        configuration.setPhysicalNamingStrategy(new SnakeCasePhysicalNamingStrategy());
-
-        configuration.addAnnotatedClass(Client.class);
-        configuration.addAnnotatedClass(Expert.class);
-        configuration.addAnnotatedClass(Admin.class);
-        configuration.addAnnotatedClass(Comment.class);
-        configuration.addAnnotatedClass(Offer.class);
-        configuration.addAnnotatedClass(Order.class);
-        configuration.addAnnotatedClass(Category.class);
-        configuration.addAnnotatedClass(SubCategory.class);
-
-        StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
-                .applySettings(hibernateProperties).build();
-        return configuration.buildSessionFactory(serviceRegistry);
-    }
 
     @Bean
     public Properties hibernateProperties() {
