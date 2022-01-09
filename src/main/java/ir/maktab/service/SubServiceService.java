@@ -1,10 +1,11 @@
 package ir.maktab.service;
 
-import ir.maktab.dao.ServiceDao;
+import ir.maktab.dao.CategoryDao;
 import ir.maktab.dao.SubServiceDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.exception.UserStatusException;
+import ir.maktab.model.entity.Category;
 import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.SubService;
 import ir.maktab.model.enumaration.UserStatus;
@@ -21,12 +22,12 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class SubServiceService {
     private final SubServiceDao subServiceDao;
-    private final ServiceDao serviceDao;
+    private final CategoryDao categoryDao;
 
-    public void add(ir.maktab.model.entity.Service service, SubService subService){
-        Optional<ir.maktab.model.entity.Service> foundService = serviceDao.findByTitle(service.getTitle());
+    public void add(Category category, SubService subService){
+        Optional<Category> foundService = categoryDao.findByTitle(category.getTitle());
         if(foundService.isEmpty())
-            throw new NotFoundException("Service not found!");
+            throw new NotFoundException("Category not found!");
         Optional<SubService> foundSubService = subServiceDao.findByTitle(subService.getTitle());
         if(foundSubService.isPresent())
             throw new DuplicateException("Duplicate sub service!");
@@ -40,33 +41,33 @@ public class SubServiceService {
         return subServices;
     }
 
-    public void update(ir.maktab.model.entity.Service service, SubService subService){
-        getServiceAndSubService(service, subService);
-        List<SubService> subServices = service.getSubServices();
+    public void update(Category category, SubService subService){
+        getServiceAndSubService(category, subService);
+        List<SubService> subServices = category.getSubServices();
         subServices.add(subService);
-        service.setSubServices(subServices);
-        serviceDao.update(service);
+        category.setSubServices(subServices);
+        categoryDao.update(category);
     }
 
-    public void remove(ir.maktab.model.entity.Service service, SubService subService){
-        getServiceAndSubService(service, subService);
-        List<SubService> subServices = service.getSubServices();
+    public void remove(Category category, SubService subService){
+        getServiceAndSubService(category, subService);
+        List<SubService> subServices = category.getSubServices();
         subServices.remove(subService);
-        service.setSubServices(subServices);
-        serviceDao.update(service);
+        category.setSubServices(subServices);
+        categoryDao.update(category);
     }
 
-    private void getServiceAndSubService(ir.maktab.model.entity.Service service, SubService subService) {
-        Optional<ir.maktab.model.entity.Service> foundService = serviceDao.findByTitle(service.getTitle());
+    private void getServiceAndSubService(Category category, SubService subService) {
+        Optional<Category> foundService = categoryDao.findByTitle(category.getTitle());
         if(foundService.isEmpty())
-            throw new NotFoundException("Service not found!");
+            throw new NotFoundException("Category not found!");
         Optional<SubService> found = subServiceDao.findByTitle(subService.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("sub service not found!");
     }
 
-    public void addExpertToSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
-        getServiceAndSubService(service, subService);
+    public void addExpertToSubService(Category category, SubService subService, Expert expert){
+        getServiceAndSubService(category, subService);
         if(!(expert.getUserStatus().equals(UserStatus.CONFIRMED)))
             throw new UserStatusException("The expert not confirmed!");
         List<Expert> experts = subService.getExperts();
@@ -75,8 +76,8 @@ public class SubServiceService {
         subServiceDao.update(subService);
     }
 
-    public void removeExpertFromSubService(ir.maktab.model.entity.Service service, SubService subService, Expert expert){
-        getServiceAndSubService(service, subService);
+    public void removeExpertFromSubService(Category category, SubService subService, Expert expert){
+        getServiceAndSubService(category, subService);
         List<Expert> experts = subService.getExperts();
         experts.remove(expert);
         subService.setExperts(experts);

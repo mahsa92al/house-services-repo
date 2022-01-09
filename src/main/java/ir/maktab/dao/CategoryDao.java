@@ -1,6 +1,6 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.entity.Service;
+import ir.maktab.model.entity.Category;
 import lombok.RequiredArgsConstructor;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,51 +15,51 @@ import java.util.Optional;
  */
 @Repository
 @RequiredArgsConstructor
-public class ServiceDao {
+public class CategoryDao {
     private final SessionFactory sessionFactory;
 
-    public void save(Service service) {
+    public void save(Category category) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.save(service);
+        session.save(category);
         session.getTransaction().commit();
         session.close();
     }
 
-    public Optional<Service> findByTitle(String title) {
+    public Optional<Category> findByTitle(String title) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Service> hql = session.createQuery("from Service s where s.title=:title");
+        Query<Category> hql = session.createQuery("from Category c where c.title=:title");
         hql.setParameter("title", title);
-        List<Service> list = hql.getResultList();
+        List<Category> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return Optional.ofNullable(list.isEmpty() ? null : list.get(0));
     }
 
-    public void update(Service service) {
+    public void update(Category category) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        session.update(service);
+        session.update(category);
         session.getTransaction().commit();
         session.close();
     }
 
-    public List<Service> findAllServices() {
+    public List<Category> findAllCategories() {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query<Service> hql = session.createQuery("from Service ");
-        List<Service> list = hql.getResultList();
+        Query<Category> hql = session.createQuery("from Category ");
+        List<Category> list = hql.getResultList();
         session.getTransaction().commit();
         session.close();
         return list;
     }
 
-    public void delete(Service service) {
+    public void delete(Category category) {
         Session session = sessionFactory.openSession();
         session.beginTransaction();
-        Query hql = session.createQuery("delete Service s where s.title=:title");
-        hql.setParameter("title", service.getTitle());
+        Query hql = session.createQuery("delete Category c where c.title=:title");
+        hql.setParameter("title", category.getTitle());
         hql.executeUpdate();
         session.getTransaction().commit();
         session.close();

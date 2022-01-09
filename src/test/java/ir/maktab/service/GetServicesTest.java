@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class GetServicesTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ServiceService serviceService = context.getBean(ServiceService.class);
+    CategoryService categoryService = context.getBean(CategoryService.class);
 
     @Test
     void when_GetAllServices_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                serviceService.getAllServices());
+                categoryService.getAllCategories());
         assertEquals("there is no service!", result.getMessage());
     }
 }

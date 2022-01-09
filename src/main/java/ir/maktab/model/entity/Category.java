@@ -13,12 +13,12 @@ import java.util.List;
 @Setter
 @Getter
 @Entity
-public class Service {
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(unique = true)
     private String title;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "service")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
     private List<SubService> subServices = new ArrayList<>();
 }

@@ -2,7 +2,7 @@ package ir.maktab.model.dto;
 
 import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.ClientOrder;
-import ir.maktab.model.entity.Service;
+import ir.maktab.model.entity.Category;
 
 import java.util.List;
 
@@ -14,6 +14,6 @@ public class SubServiceDto {
     private Double basePrice;
     private String description;
     private List<Expert> experts;
-    private Service service;
+    private Category category;
     private List<ClientOrder> clientOrder;
 }

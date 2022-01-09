@@ -3,7 +3,7 @@ package ir.maktab.service;
 import ir.maktab.config.SpringConfig;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.entity.Expert;
-import ir.maktab.model.entity.Service;
+import ir.maktab.model.entity.Category;
 import ir.maktab.model.entity.SubService;
 import ir.maktab.model.enumaration.Role;
 import ir.maktab.model.enumaration.UserStatus;
@@ -19,13 +19,13 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class AddExpertToSubServiceTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
     SubServiceService subServiceService = context.getBean(SubServiceService.class);
-    Service service;
+    Category service;
     SubService subService;
     Expert expert;
 
     @Test
     void give_Service_And_SubService_And_Expert_when_AddExpertToSubService_Calls_Then_Service_NotFoundException_Return(){
-        service = new Service();
+        service = new Category();
         service.setTitle("house facilities");
         subService = new SubService();
         subService.setTitle("water");
@@ -47,7 +47,7 @@ public class AddExpertToSubServiceTest {
 
     @Test
     void give_Service_And_SubService_And_Expert_when_AddExpertToSubService_Calls_Then_SubService_NotFoundException_Return(){
-        service = new Service();
+        service = new Category();
         service.setTitle("cleaning");
         subService = new SubService();
         subService.setTitle("floor washing");

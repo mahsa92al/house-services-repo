@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * @author Mahsa Alikhani m-58
  */
-public class ServiceDto {
+public class CategoryDto {
     private String title;
     private List<SubService> subServices;
 }

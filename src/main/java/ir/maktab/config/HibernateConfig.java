@@ -34,7 +34,7 @@ public class HibernateConfig {
         configuration.addAnnotatedClass(Comment.class);
         configuration.addAnnotatedClass(Offer.class);
         configuration.addAnnotatedClass(ClientOrder.class);
-        configuration.addAnnotatedClass(Service.class);
+        configuration.addAnnotatedClass(Category.class);
         configuration.addAnnotatedClass(SubService.class);
 
         StandardServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder()
