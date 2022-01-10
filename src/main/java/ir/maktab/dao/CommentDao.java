@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface CommentDao extends JpaRepository<Comment, Long> {
 
-    public List<Comment> findAllByExpert_IdOrderByRate(Long expertId);
+    List<Comment> findAllByExpert_IdOrderByRate(Long expertId);
 }
