@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface CategoryDao extends JpaRepository<Category, Long> {
 
-    public Optional<Category> findByTitleIgnoreCase(String title);
+    Optional<Category> findByTitleIgnoreCase(String title);
 }
