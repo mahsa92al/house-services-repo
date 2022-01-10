@@ -10,7 +10,7 @@ import java.util.Optional;
  * @author Mahsa Alikhani m-58
  */
 @Repository
-public interface CategoryDao extends JpaRepository<Category, Long> {
+public interface CategoryDao extends JpaRepository<Category, Integer> {
 
     Optional<Category> findByTitleIgnoreCase(String title);
 }
