@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class AddClientTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ClientService clientService = context.getBean(ClientService.class);
+    ClientServiceImpl clientServiceImpl = context.getBean(ClientServiceImpl.class);
     Client client;
     @BeforeEach
     void init(){
@@ -34,7 +34,7 @@ public class AddClientTest {
     @Test
     void give_Client_when_Add_Calls_Then_Exception_Return(){
         DuplicateException result = assertThrows(DuplicateException.class, ()->
-                clientService.add(client));
+                clientServiceImpl.add(client));
         assertEquals("Duplicate client!", result.getMessage());
     }
 }

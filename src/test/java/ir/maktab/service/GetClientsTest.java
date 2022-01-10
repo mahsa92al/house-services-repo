@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class GetClientsTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ClientService clientService = context.getBean(ClientService.class);
+    ClientServiceImpl clientServiceImpl = context.getBean(ClientServiceImpl.class);
 
     @Test
     void when_GetAllClients_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                clientService.getAllClients());
+                clientServiceImpl.getAllClients());
         assertEquals("there is no client!", result.getMessage());
     }
 }

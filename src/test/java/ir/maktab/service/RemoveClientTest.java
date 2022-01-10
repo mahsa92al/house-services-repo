@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class RemoveClientTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ClientService clientService = context.getBean(ClientService.class);
+    ClientServiceImpl clientServiceImpl = context.getBean(ClientServiceImpl.class);
     Client client;
     @BeforeEach
     void init(){
@@ -33,7 +33,7 @@ public class RemoveClientTest {
     @Test
     void give_Client_when_Remove_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                clientService.remove(client));
+                clientServiceImpl.remove(client));
         assertEquals("client not found!", result.getMessage());
     }
 }

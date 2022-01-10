@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class UpdateClientTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ClientService clientService = context.getBean(ClientService.class);
+    ClientServiceImpl clientServiceImpl = context.getBean(ClientServiceImpl.class);
     Client client;
     @BeforeEach
     void init(){
@@ -31,7 +31,7 @@ public class UpdateClientTest {
 
     @Test
     void give_Client_when_Update_Calls_Then_Password_Update(){
-        clientService.update(client);
+        clientServiceImpl.update(client);
         assertEquals("456", client.getPassword());
     }
 }
