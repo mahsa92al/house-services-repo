@@ -1,55 +1,20 @@
 package ir.maktab.service;
 
-import ir.maktab.dao.CategoryDao;
-import ir.maktab.exception.DuplicateException;
-import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.dto.CategoryDto;
-import ir.maktab.model.entity.Category;
-import ir.maktab.service.mapper.CategoryMapper;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 /**
  * @author Mahsa Alikhani m-58
  */
-@Service
-@RequiredArgsConstructor
-public class CategoryService {
-    private final CategoryDao categoryDao;
-    private final CategoryMapper categoryMapper;
+public interface CategoryService {
 
-    public void add(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
-        if(found.isPresent())
-            throw new DuplicateException("Duplicate category!");
-        Category category = categoryMapper.toCategory(categoryDto);
-        categoryDao.save(category);
-    }
+    void add(CategoryDto categoryDto);
 
-    public List<CategoryDto> getAllCategories(){
-        List<Category> categories = categoryDao.findAll();
-        if(categories.isEmpty())
-            throw new NotFoundException("there is no category!");
-        return categories.stream().map(categoryMapper::toCategoryDto).collect(Collectors.toList());
-    }
+    List<CategoryDto> getAllCategories();
 
-    public void update(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
-        if(found.isEmpty())
-            throw new NotFoundException("category not found!");
-        Category category = categoryMapper.toCategory(categoryDto);
-        categoryDao.save(category);
-    }
+    void update(CategoryDto categoryDto);
 
-    public void remove(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
-        if(found.isEmpty())
-            throw new NotFoundException("category not found!");
-        Category category = categoryMapper.toCategory(categoryDto);
-        categoryDao.delete(category);
-    }
+    void remove(CategoryDto categoryDto);
+
 }
