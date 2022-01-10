@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  */
 public class UpdateExpertTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ExpertService expertService = context.getBean(ExpertService.class);
+    ExpertServiceImpl expertServiceImpl = context.getBean(ExpertServiceImpl.class);
 
     Expert expert;
     @BeforeEach
@@ -31,7 +31,7 @@ public class UpdateExpertTest {
 
     @Test
     void give_Expert_when_Update_Calls_Then_Password_Update(){
-        expertService.update(expert);
+        expertServiceImpl.update(expert);
         assertEquals("456", expert.getPassword());
     }
 }

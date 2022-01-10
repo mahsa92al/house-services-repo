@@ -2,7 +2,6 @@ package ir.maktab.service;
 
 import ir.maktab.config.SpringConfig;
 import ir.maktab.exception.NotFoundException;
-import ir.maktab.model.entity.Client;
 import ir.maktab.model.entity.Expert;
 import ir.maktab.model.enumaration.Role;
 import ir.maktab.model.enumaration.UserStatus;
@@ -18,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class RemoveExpertTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ExpertService expertService = context.getBean(ExpertService.class);
+    ExpertServiceImpl expertServiceImpl = context.getBean(ExpertServiceImpl.class);
     Expert expert;
     @BeforeEach
     void init(){
@@ -35,7 +34,7 @@ public class RemoveExpertTest {
     @Test
     void give_Expert_when_Remove_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                expertService.remove(expert));
+                expertServiceImpl.remove(expert));
         assertEquals("expert not found!", result.getMessage());
     }
 }

@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class AddExpertTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ExpertService expertService = context.getBean(ExpertService.class);
+    ExpertServiceImpl expertServiceImpl = context.getBean(ExpertServiceImpl.class);
 
     Expert expert;
 
@@ -32,7 +32,7 @@ public class AddExpertTest {
         expert.setRole(Role.EXPERT);
         expert.setImageData(new byte[3000]);
         DuplicateException result = assertThrows(DuplicateException.class, ()->
-                expertService.add(expert));
+                expertServiceImpl.add(expert));
         assertEquals("Duplicate expert!", result.getMessage());
     }
 
@@ -47,7 +47,7 @@ public class AddExpertTest {
         expert.setRole(Role.EXPERT);
         expert.setImageData(new byte[4000]);
         ImageSizeException result = assertThrows(ImageSizeException.class, ()->
-                expertService.add(expert));
+                expertServiceImpl.add(expert));
         assertEquals("Maximum image size should be 300 KB", result.getMessage());
     }
 }

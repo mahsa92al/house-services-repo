@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class GetExpertsTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    ExpertService expertService = context.getBean(ExpertService.class);
+    ExpertServiceImpl expertServiceImpl = context.getBean(ExpertServiceImpl.class);
 
     @Test
     void when_GetAllExperts_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                expertService.getAllExperts());
+                expertServiceImpl.getAllExperts());
         assertEquals("there is no expert!", result.getMessage());
     }
 }
