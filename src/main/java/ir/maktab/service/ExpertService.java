@@ -4,12 +4,15 @@ import ir.maktab.dao.ExpertDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.ImageSizeException;
 import ir.maktab.exception.NotFoundException;
+import ir.maktab.model.dto.ExpertDto;
 import ir.maktab.model.entity.Expert;
+import ir.maktab.service.mapper.ExpertMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author Mahsa Alikhani m-58
@@ -18,6 +21,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ExpertService {
     private final ExpertDao expertDao;
+    private final ExpertMapper expertMapper;
 
     public void add(Expert expert){
         Optional<Expert> found = expertDao.findByEmail(expert.getEmail());
@@ -32,14 +36,14 @@ public class ExpertService {
         Optional<Expert> found = expertDao.findByEmail(expert.getEmail());
         if(found.isEmpty())
             throw new NotFoundException("expert not found!");
-        expertDao.update(expert);
+        expertDao.save(expert);
     }
 
-    public List<Expert> getAllExperts(){
-        List<Expert> experts = expertDao.findAllExperts();
+    public List<ExpertDto> getAllExperts(){
+        List<Expert> experts = expertDao.findAll();
         if(experts.isEmpty())
             throw new NotFoundException("there is no expert!");
-        return experts;
+        return experts.stream().map(expertMapper::toExpertDto).collect(Collectors.toList());
     }
 
     public void remove(Expert expert){
