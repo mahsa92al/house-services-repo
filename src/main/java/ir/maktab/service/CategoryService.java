@@ -19,28 +19,28 @@ public class CategoryService {
     private final CategoryDao categoryDao;
 
     public void add(Category category){
-        Optional<Category> found = categoryDao.findByTitle(category.getTitle());
+        Optional<Category> found = categoryDao.findByTitleIgnoreCase(category.getTitle());
         if(found.isPresent())
             throw new DuplicateException("Duplicate category!");
         categoryDao.save(category);
     }
 
     public List<Category> getAllCategories(){
-        List<Category> services = categoryDao.findAllCategories();
-        if(services.isEmpty())
+        List<Category> categories = categoryDao.findAll();
+        if(categories.isEmpty())
             throw new NotFoundException("there is no category!");
-        return services;
+        return categories;
     }
 
     public void update(Category category){
-        Optional<Category> found = categoryDao.findByTitle(category.getTitle());
+        Optional<Category> found = categoryDao.findByTitleIgnoreCase(category.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("category not found!");
-        categoryDao.update(category);
+        categoryDao.save(category);
     }
 
     public void remove(Category category){
-        Optional<Category> found = categoryDao.findByTitle(category.getTitle());
+        Optional<Category> found = categoryDao.findByTitleIgnoreCase(category.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("category not found!");
         categoryDao.delete(category);
