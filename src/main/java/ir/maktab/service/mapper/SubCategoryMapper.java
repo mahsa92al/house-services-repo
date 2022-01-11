@@ -1,8 +1,6 @@
 package ir.maktab.service.mapper;
 
-import ir.maktab.model.dto.CategoryDto;
 import ir.maktab.model.dto.SubCategoryDto;
-import ir.maktab.model.entity.Category;
 import ir.maktab.model.entity.SubCategory;
 
 /**
