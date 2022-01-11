@@ -24,7 +24,7 @@ public class OrderDto {
     private String description;
     private Date orderPlacingDate;
     private Date proposedDateToDo;
-    private String Address;
+    private String address;
     private OrderStatus orderStatus;
     private Client client;
     private Expert expert;
