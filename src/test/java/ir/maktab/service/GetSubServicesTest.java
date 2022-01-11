@@ -13,12 +13,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class GetSubServicesTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    SubCategoryService subCategoryService = context.getBean(SubCategoryService.class);
+    SubCategoryServiceImpl subCategoryServiceImpl = context.getBean(SubCategoryServiceImpl.class);
 
     @Test
     void when_GetAllSubServices_Calls_Then_Exception_Return(){
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subCategoryService.getAllSubCategories());
+                subCategoryServiceImpl.getAllSubCategories());
         assertEquals("there is no sub service!", result.getMessage());
     }
 }

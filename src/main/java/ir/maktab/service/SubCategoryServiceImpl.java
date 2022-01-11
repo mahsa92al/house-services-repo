@@ -25,12 +25,13 @@ import java.util.stream.Collectors;
  */
 @Service
 @RequiredArgsConstructor
-public class SubCategoryService {
+public class SubCategoryServiceImpl implements SubCategoryService{
     private final SubCategoryDao subCategoryDao;
     private final CategoryDao categoryDao;
     private final CategoryMapper categoryMapper;
     private final SubCategoryMapper subCategoryMapper;
 
+    @Override
     public void add(CategoryDto categoryDto, SubCategoryDto subCategoryDto){
         Category category = categoryMapper.toCategory(categoryDto);
         Optional<Category> foundService = categoryDao.findByTitleIgnoreCase(category.getTitle());
@@ -46,6 +47,7 @@ public class SubCategoryService {
         categoryDao.save(category);
     }
 
+    @Override
     public List<SubCategoryDto> getAllSubCategories(){
         List<SubCategory> subCategories = subCategoryDao.findAll();
         if(subCategories.isEmpty())
@@ -53,6 +55,7 @@ public class SubCategoryService {
         return subCategories.stream().map(subCategoryMapper::toSubCategoryDto).collect(Collectors.toList());
     }
 
+    @Override
     public void update(Category category, SubCategory subCategory){
         checkExistenceOfCategoryAndSubCategory(category, subCategory);
         List<SubCategory> subCategories = category.getSubCategories();
@@ -61,6 +64,7 @@ public class SubCategoryService {
         categoryDao.save(category);
     }
 
+    @Override
     public void remove(Category category, SubCategory subCategory){
         checkExistenceOfCategoryAndSubCategory(category, subCategory);
         List<SubCategory> subCategories = category.getSubCategories();
@@ -75,9 +79,10 @@ public class SubCategoryService {
             throw new NotFoundException("Category not found!");
         Optional<SubCategory> found = subCategoryDao.findByTitleIgnoreCase(subCategory.getTitle());
         if(found.isEmpty())
-            throw new NotFoundException("sub category not found!");
+            throw new NotFoundException("Sub category not found!");
     }
 
+    @Override
     public void addExpertToSubCategory(Category category, SubCategory subCategory, Expert expert){
         checkExistenceOfCategoryAndSubCategory(category, subCategory);
         if(!(expert.getUserStatus().equals(UserStatus.CONFIRMED)))
@@ -88,6 +93,7 @@ public class SubCategoryService {
         subCategoryDao.save(subCategory);
     }
 
+    @Override
     public void removeExpertFromSubCategory(Category category, SubCategory subCategory, Expert expert){
         checkExistenceOfCategoryAndSubCategory(category, subCategory);
         List<Expert> experts = subCategory.getExperts();

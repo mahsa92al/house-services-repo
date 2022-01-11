@@ -18,7 +18,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class AddExpertToSubCategoryTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    SubCategoryService subCategoryService = context.getBean(SubCategoryService.class);
+    SubCategoryServiceImpl subCategoryServiceImpl = context.getBean(SubCategoryServiceImpl.class);
     Category service;
     SubCategory subCategory;
     Expert expert;
@@ -41,7 +41,7 @@ public class AddExpertToSubCategoryTest {
         expert.setImageData(new byte[3000]);
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subCategoryService.addExpertToSubCategory(service, subCategory, expert));
+                subCategoryServiceImpl.addExpertToSubCategory(service, subCategory, expert));
         assertEquals("Service not found!", result.getMessage());
     }
 
@@ -63,7 +63,7 @@ public class AddExpertToSubCategoryTest {
         expert.setImageData(new byte[3000]);
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subCategoryService.addExpertToSubCategory(service, subCategory, expert));
+                subCategoryServiceImpl.addExpertToSubCategory(service, subCategory, expert));
         assertEquals("sub service not found!", result.getMessage());
     }
 }

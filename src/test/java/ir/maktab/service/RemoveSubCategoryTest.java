@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 public class RemoveSubCategoryTest {
     AnnotationConfigApplicationContext context = new AnnotationConfigApplicationContext(SpringConfig.class);
-    SubCategoryService subCategoryService = context.getBean(SubCategoryService.class);
+    SubCategoryServiceImpl subCategoryServiceImpl = context.getBean(SubCategoryServiceImpl.class);
     Category service;
     SubCategory subCategory;
 
@@ -29,7 +29,7 @@ public class RemoveSubCategoryTest {
         subCategory.setDescription("using newest equipment");
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subCategoryService.update(service, subCategory));
+                subCategoryServiceImpl.update(service, subCategory));
         assertEquals("Service not found!", result.getMessage());
     }
 
@@ -43,7 +43,7 @@ public class RemoveSubCategoryTest {
         subCategory.setDescription("extra drying");
 
         NotFoundException result = assertThrows(NotFoundException.class, ()->
-                subCategoryService.update(service, subCategory));
+                subCategoryServiceImpl.update(service, subCategory));
         assertEquals("sub service not found!", result.getMessage());
     }
 }
