@@ -1,10 +1,13 @@
 package ir.maktab.service;
 
 import ir.maktab.dao.ClientDao;
+import ir.maktab.dao.OfferDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.dto.ClientDto;
 import ir.maktab.model.entity.Client;
+import ir.maktab.model.entity.Offer;
+import ir.maktab.model.entity.Order;
 import ir.maktab.service.mapper.ClientMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -21,6 +24,7 @@ import java.util.stream.Collectors;
 public class ClientServiceImpl implements ClientService{
     private final ClientDao clientDao;
     private final ClientMapper clientMapper;
+    private final OfferDao offerDao;
 
     @Override
     public void add(Client client){
@@ -53,4 +57,12 @@ public class ClientServiceImpl implements ClientService{
              throw new NotFoundException("client not found!");
          clientDao.delete(client);
      }
+
+    @Override
+    public List<Offer> getClientOrderOffersOrderByProposedPriceAndExpertRate(Order order) {
+        List<Offer> offers = offerDao.findOfferByOrder(order);
+        if(offers.isEmpty())
+            throw new NotFoundException("there is no offers!");
+        return offers;
+    }
 }

@@ -2,6 +2,8 @@ package ir.maktab.service;
 
 import ir.maktab.model.dto.ClientDto;
 import ir.maktab.model.entity.Client;
+import ir.maktab.model.entity.Offer;
+import ir.maktab.model.entity.Order;
 
 import java.util.List;
 
@@ -10,11 +12,13 @@ import java.util.List;
  */
 public interface ClientService {
 
-    public void add(Client client);
+    void add(Client client);
 
-    public void update(Client client);
+    void update(Client client);
 
-    public List<ClientDto> getAllClients();
+    List<ClientDto> getAllClients();
 
-    public void remove(Client client);
+    void remove(Client client);
+
+    List<Offer> getClientOrderOffersOrderByProposedPriceAndExpertRate(Order order);
 }
