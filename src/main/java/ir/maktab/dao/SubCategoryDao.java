@@ -12,5 +12,5 @@ import java.util.Optional;
 @Repository
 public interface SubCategoryDao extends JpaRepository<SubCategory, Integer> {
 
-    Optional<SubCategory> findByTitleIgnoreCase(String title);
+    Optional<SubCategory> findByTitle(String title);
 }
