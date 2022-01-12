@@ -6,11 +6,15 @@ import ir.maktab.exception.ImageSizeException;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.model.dto.ExpertDto;
 import ir.maktab.model.entity.Expert;
+import ir.maktab.model.entity.Order;
+import ir.maktab.model.entity.SubCategory;
 import ir.maktab.service.mapper.ExpertMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -55,5 +59,17 @@ public class ExpertServiceImpl implements ExpertService{
         if(found.isEmpty())
             throw new NotFoundException("expert not found!");
         expertDao.delete(expert);
+    }
+
+    @Override
+    public Map<String, List<Order>> getExpertSubCategoryOrdersList(Expert expert) {
+        List<SubCategory> subCategories = expertDao.findExpertSubCategoryList(expert.getEmail());
+        if(subCategories.isEmpty())
+            throw new NotFoundException("there is no sub category list");
+        Map<String, List<Order>> orderSubCategoryMap = new HashMap<>();
+        for (SubCategory sc: subCategories) {
+            orderSubCategoryMap.put(sc.getTitle(), sc.getOrders());
+        }
+        return orderSubCategoryMap;
     }
 }
