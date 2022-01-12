@@ -1,6 +1,7 @@
 package ir.maktab.service;
 
 import ir.maktab.model.dto.CategoryDto;
+import ir.maktab.model.entity.Category;
 
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  */
 public interface CategoryService {
 
-    void add(CategoryDto categoryDto);
+    void add(Category category);
 
     List<CategoryDto> getAllCategories();
 

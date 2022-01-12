@@ -23,11 +23,10 @@ public class CategoryServiceImpl implements CategoryService{
     private final CategoryMapper categoryMapper;
 
     @Override
-    public void add(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
+    public void add(Category category){
+        Optional<Category> found = categoryDao.findByTitle(category.getTitle());
         if(found.isPresent())
             throw new DuplicateException("Duplicate category!");
-        Category category = categoryMapper.toCategory(categoryDto);
         categoryDao.save(category);
     }
 
@@ -41,16 +40,16 @@ public class CategoryServiceImpl implements CategoryService{
 
     @Override
     public void update(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
+        Category category = categoryMapper.toCategory(categoryDto);
+        Optional<Category> found = categoryDao.findByTitle(category.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("category not found!");
-        Category category = categoryMapper.toCategory(categoryDto);
         categoryDao.save(category);
     }
 
     @Override
     public void remove(CategoryDto categoryDto){
-        Optional<Category> found = categoryDao.findByTitleIgnoreCase(categoryDto.getTitle());
+        Optional<Category> found = categoryDao.findByTitle(categoryDto.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("category not found!");
         Category category = categoryMapper.toCategory(categoryDto);
