@@ -1,4 +1,11 @@
-package ir.maktab.exception;/**
+package ir.maktab.exception;
+
+/**
  * @author Mahsa Alikhani m-58
- */public class OfferException {
+ */
+public class OfferException extends RuntimeException{
+
+    public OfferException(String message) {
+        super(message);
+    }
 }
