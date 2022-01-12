@@ -1,4 +1,11 @@
-package ir.maktab.exception;/**
+package ir.maktab.exception;
+
+/**
  * @author Mahsa Alikhani m-58
- */public class ProposedPriceException {
+ */
+public class ProposedPriceException extends RuntimeException{
+
+    public ProposedPriceException(String message) {
+        super(message);
+    }
 }
