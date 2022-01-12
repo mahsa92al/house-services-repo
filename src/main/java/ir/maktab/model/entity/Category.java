@@ -21,6 +21,6 @@ public class Category {
     private int id;
     @Column(unique = true)
     private String title;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category", fetch = FetchType.EAGER)
     private List<SubCategory> subCategories = new ArrayList<>();
 }
