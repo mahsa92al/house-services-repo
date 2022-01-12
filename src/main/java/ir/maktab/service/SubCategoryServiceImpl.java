@@ -5,17 +5,14 @@ import ir.maktab.dao.SubCategoryDao;
 import ir.maktab.exception.DuplicateException;
 import ir.maktab.exception.NotFoundException;
 import ir.maktab.exception.UserStatusException;
-import ir.maktab.model.dto.CategoryDto;
 import ir.maktab.model.dto.SubCategoryDto;
 import ir.maktab.model.entity.Category;
 import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.SubCategory;
 import ir.maktab.model.enumaration.UserStatus;
-import ir.maktab.service.mapper.CategoryMapper;
 import ir.maktab.service.mapper.SubCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
