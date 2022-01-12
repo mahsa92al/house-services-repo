@@ -15,7 +15,9 @@ import ir.maktab.service.mapper.CategoryMapper;
 import ir.maktab.service.mapper.SubCategoryMapper;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -28,20 +30,19 @@ import java.util.stream.Collectors;
 public class SubCategoryServiceImpl implements SubCategoryService{
     private final SubCategoryDao subCategoryDao;
     private final CategoryDao categoryDao;
-    private final CategoryMapper categoryMapper;
     private final SubCategoryMapper subCategoryMapper;
 
     @Override
-    public void add(CategoryDto categoryDto, SubCategoryDto subCategoryDto){
-        Category category = categoryMapper.toCategory(categoryDto);
-        Optional<Category> foundService = categoryDao.findByTitleIgnoreCase(category.getTitle());
+    public void add(Category category, SubCategory subCategory){
+        Optional<Category> foundService = categoryDao.findByTitle(category.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Category not found!");
-        SubCategory subCategory = subCategoryMapper.toSubCategory(subCategoryDto);
-        Optional<SubCategory> foundSubService = subCategoryDao.findByTitleIgnoreCase(subCategory.getTitle());
-        if(foundSubService.isPresent())
+        Optional<SubCategory> foundSubCategory = subCategoryDao.findByTitle(subCategory.getTitle());
+        if(foundSubCategory.isPresent())
             throw new DuplicateException("Duplicate sub category!");
         List<SubCategory> subCategories = category.getSubCategories();
+        if(subCategories == null)
+            subCategories = new ArrayList<>();
         subCategories.add(subCategory);
         category.setSubCategories(subCategories);
         categoryDao.save(category);
@@ -74,10 +75,10 @@ public class SubCategoryServiceImpl implements SubCategoryService{
     }
 
     private void checkExistenceOfCategoryAndSubCategory(Category category, SubCategory subCategory) {
-        Optional<Category> foundService = categoryDao.findByTitleIgnoreCase(category.getTitle());
+        Optional<Category> foundService = categoryDao.findByTitle(category.getTitle());
         if(foundService.isEmpty())
             throw new NotFoundException("Category not found!");
-        Optional<SubCategory> found = subCategoryDao.findByTitleIgnoreCase(subCategory.getTitle());
+        Optional<SubCategory> found = subCategoryDao.findByTitle(subCategory.getTitle());
         if(found.isEmpty())
             throw new NotFoundException("Sub category not found!");
     }
