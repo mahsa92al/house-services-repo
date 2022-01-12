@@ -39,7 +39,7 @@ public class Order {
     @JoinColumn(name = "client_id", nullable = false)
     private Client client;
     @ManyToOne
-    @JoinColumn(name = "expert_id", nullable = false)
+    @JoinColumn(name = "expert_id")
     private Expert expert;
     @ManyToOne
     @JoinColumn(name = "sub_category_id", nullable = false)
