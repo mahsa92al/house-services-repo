@@ -18,4 +18,7 @@ public interface OfferDao extends JpaRepository<Offer, Long> {
 
     @Query(value = "select o from Offer o where o.expert = :expert and o.order = :order")
     List<Offer> findAllOffers(@Param("expert") Expert expert, @Param("order") Order order);
+
+    @Query(value = "select o from Offer o where o.order = :order order by o.proposedPrice desc, o.expert.meanRate desc ")
+    List<Offer> findOfferByOrder(@Param("order") Order order);
 }
