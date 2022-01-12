@@ -2,6 +2,7 @@ package ir.maktab.service;
 
 import ir.maktab.model.dto.OfferDto;
 import ir.maktab.model.entity.Expert;
+import ir.maktab.model.entity.Offer;
 import ir.maktab.model.entity.Order;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface OfferService {
 
-    void addOffer(OfferDto offerDto);
+    Offer addOffer(OfferDto offerDto);
 
     void removeOffer(OfferDto offerDto);
 
