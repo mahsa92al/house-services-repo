@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.OrderDto;
 import ir.maktab.model.entity.Order;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class OrderMapper {
 
     public Order toOrder(OrderDto orderDto){

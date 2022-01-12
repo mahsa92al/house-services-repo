@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.CategoryDto;
 import ir.maktab.model.entity.Category;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class CategoryMapper {
 
     public Category toCategory(CategoryDto categoryDto){

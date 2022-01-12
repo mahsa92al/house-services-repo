@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.OfferDto;
 import ir.maktab.model.entity.Offer;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class OfferMapper {
 
     public Offer toOffer(OfferDto offerDto){

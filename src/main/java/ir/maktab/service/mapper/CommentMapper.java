@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.CommentDto;
 import ir.maktab.model.entity.Comment;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class CommentMapper {
 
     public Comment toComment(CommentDto commentDto){

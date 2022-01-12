@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.ClientDto;
 import ir.maktab.model.entity.Client;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class ClientMapper {
     private ClientDto clientDto;
     private Client client;

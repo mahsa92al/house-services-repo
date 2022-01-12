@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.ExpertDto;
 import ir.maktab.model.entity.Expert;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class ExpertMapper {
 
     private ExpertDto expertDto;

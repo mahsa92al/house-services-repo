@@ -2,10 +2,12 @@ package ir.maktab.service.mapper;
 
 import ir.maktab.model.dto.SubCategoryDto;
 import ir.maktab.model.entity.SubCategory;
+import org.springframework.stereotype.Component;
 
 /**
  * @author Mahsa Alikhani m-58
  */
+@Component
 public class SubCategoryMapper {
 
     public SubCategory toSubCategory(SubCategoryDto subCategoryDto){
