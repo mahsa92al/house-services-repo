@@ -13,7 +13,7 @@ import java.util.List;
  */
 public interface SubCategoryService {
 
-    void add(CategoryDto categoryDto, SubCategoryDto subCategoryDto);
+    void add(Category category, SubCategory subCategory);
 
     List<SubCategoryDto> getAllSubCategories();
 
