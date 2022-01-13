@@ -1,62 +1,50 @@
 package ir.maktab.dao;
 
-import ir.maktab.model.dto.PersonDto;
+import ir.maktab.model.entity.Category;
+import ir.maktab.model.entity.Expert;
 import ir.maktab.model.entity.Person;
+import ir.maktab.model.entity.SubCategory;
 import ir.maktab.model.enumaration.Role;
-import lombok.RequiredArgsConstructor;
-import org.hibernate.Criteria;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.criterion.Projections;
-import org.hibernate.criterion.Restrictions;
-import org.hibernate.transform.Transformers;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.criteria.Join;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * @author Mahsa Alikhani m-58
  */
 @Repository
-@RequiredArgsConstructor
-public class PersonDao {
-    private final SessionFactory sessionFactory;
+public interface PersonDao extends JpaRepository<Person, Long>, JpaSpecificationExecutor<Person> {
 
-    public List<PersonDto> findAllUsers(Role role, String name, String lastName, String email) {
-        Session session = sessionFactory.openSession();
-        Transaction transaction = session.beginTransaction();
-        Criteria criteria = getCriteria(role, name, lastName, email, session);
-        List<PersonDto> allUsers = criteria.list();
-        transaction.commit();
-        session.close();
-        return allUsers;
-    }
-    private Criteria getCriteria(Role role, String name, String lastName, String email, Session session) {
+    static Specification<Person> findPersonByCriteria(Role role, String name, String lastName, String email, String speciality) {
 
-        Criteria criteria = session.createCriteria(Person.class, "p");
-
-        if (role != null) {
-            criteria.add(Restrictions.eq("p.role", role));
-        }
-        if (name != null) {
-            criteria.add(Restrictions.eq("p.name", name));
-        }
-        if (lastName != null) {
-            criteria.add(Restrictions.eq("p.lastName", lastName));
-        }
-        if (email != null) {
-            criteria.add(Restrictions.eq("p.email", email));
-        }
-
-        criteria.setProjection(Projections.projectionList()
-                .add(Projections.property("p.role").as("role"))
-                .add(Projections.property("p.name").as("name"))
-                .add(Projections.property("p.lastName").as("lastName"))
-                .add(Projections.property("p.email").as("email"))
-                .add(Projections.property("p.registrationDate").as("registrationDate"))
-                .add(Projections.property("p.userStatus").as("userStatus")));
-        criteria.setResultTransformer(Transformers.aliasToBean(PersonDto.class));
-        return criteria;
+        List<Predicate> predicates = new ArrayList<>();
+        return (root, cq, cb) -> {
+            if (role != null) {
+                predicates.add(cb.equal(root.get("role"), role));
+            }
+            if (name != null) {
+                predicates.add(cb.equal(root.get("name"), name));
+            }
+            if (lastName != null) {
+                predicates.add(cb.equal(root.get("lastName"), lastName));
+            }
+            if (email != null) {
+                predicates.add(cb.equal(root.get("email"), email));
+            }
+            if (speciality != null) {
+                Root<Expert> fromExperts = cq.from(Expert.class);
+                Join<Expert, SubCategory> subCategories = fromExperts.join("subCategories");
+                Join<SubCategory, Category> category = subCategories.join("category");
+                predicates.add(cb.equal(category.get("title"), speciality));
+            }
+            return cb.and(predicates.toArray(new Predicate[predicates.size()]));
+        };
     }
 }
