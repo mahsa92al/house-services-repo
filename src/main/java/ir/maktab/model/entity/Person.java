@@ -14,10 +14,11 @@ import java.util.Date;
  */
 @Setter
 @Getter
+@Entity
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class Person {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private long id;
     @Column(nullable = false)
     private String name;
